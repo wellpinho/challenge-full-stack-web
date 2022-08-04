@@ -24,27 +24,27 @@ describe("## User routes", () => {
       });
   });
 
-  // it("-- Should receive error if user already exists", async () => {
-  //   const user = {
-  //     name: "Wellington",
-  //     email: "test@gmail.com",
-  //     CPF: "21878465040",
-  //   };
+  it("-- Should receive error if user already exists", async () => {
+    const user = {
+      name: "Wellington",
+      email: "test@gmail.com",
+      CPF: "21878465040",
+    };
 
-  //   await request(app)
-  //     .post("/users")
-  //     .send(user)
-  //     .then((res) => {
-  //       if (res.status === 201) {
-  //         return res.body;
-  //       } else {
-  //         expect(res.status).toBe(400);
-  //         expect(res.body.message).toEqual(
-  //           "User already exists! Please login in"
-  //         );
-  //       }
-  //     });
-  // });
+    await request(app)
+      .post("/users")
+      .send(user)
+      .then((res) => {
+        if (res.status === 201) {
+          return res.body;
+        } else {
+          expect(res.status).toBe(400);
+          expect(res.body.message).toEqual(
+            "User already exists! Please virify your email or cpf"
+          );
+        }
+      });
+  });
 
   // it("-- should receive list from all users", async () => {
   //   await request(app)
