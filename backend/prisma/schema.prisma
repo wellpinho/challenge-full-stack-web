@@ -16,6 +16,7 @@ model User {
   email String @unique
   RA    String
   CPF   String
+  role  String
 
   @@map("users")
 }

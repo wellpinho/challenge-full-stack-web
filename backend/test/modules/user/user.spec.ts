@@ -46,27 +46,16 @@ describe("## User routes", () => {
       });
   });
 
-  // it("-- should receive list from all users", async () => {
-  //   await request(app)
-  //     .get("/users")
-  //     .then((res) => {
-  //       if (res.status === 400) {
-  //         return res.status;
-  //       }
-  //       expect(res.status).toBe(200);
-  //     });
-  // });
-
-  // it("-- should receive error if user role is equal to #user", async () => {
-  //   await request(app)
-  //     .get("/users")
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         return res.status;
-  //       }
-  //       expect(res.status).toBe(400);
-  //     });
-  // });
+  it("-- should receive list from all users", async () => {
+    await request(app)
+      .get("/users")
+      .then((res) => {
+        if (res.status === 400) {
+          return res.status;
+        }
+        expect(res.status).toBe(200);
+      });
+  });
 
   // it("-- should get user by id", async () => {
   //   const user = await prismaClient.user.findFirst({

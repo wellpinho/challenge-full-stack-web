@@ -11,6 +11,12 @@ interface IUser {
 }
 
 class UserService {
+  async list() {
+    const users = await prismaClient.user.findMany();
+
+    return users;
+  }
+
   async create({ name, email, CPF }: IUser) {
     if (!isCpf(CPF)) {
       throw new AppError("Invalid CPF");
@@ -32,6 +38,7 @@ class UserService {
         email,
         RA: uuidv4(),
         CPF,
+        role: "user",
       },
     });
 

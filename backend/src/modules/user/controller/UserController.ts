@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
+import { resolve } from "path";
 import { UserService } from "../service/UserService";
 
 class UserController {
+  async list(req: Request, res: Response) {
+    const listUsers = new UserService();
+    const users = await listUsers.list();
+
+    return res.status(200).json(users);
+  }
   async create(req: Request, res: Response) {
     const { name, email, CPF } = req.body;
     const createUserService = new UserService();
