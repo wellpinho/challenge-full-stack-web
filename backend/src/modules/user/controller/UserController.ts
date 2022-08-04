@@ -33,6 +33,14 @@ class UserController {
 
     return res.status(201).json(user);
   }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+    const updateUserService = new UserService();
+    const user = await updateUserService.delete(id);
+
+    return res.status(200).json(user);
+  }
 }
 
 export { UserController };

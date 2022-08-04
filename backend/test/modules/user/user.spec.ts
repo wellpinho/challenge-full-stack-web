@@ -58,37 +58,6 @@ describe("## User routes", () => {
       });
   });
 
-  // it("-- should get user by id", async () => {
-  //   const user = await prismaClient.user.findFirst({
-  //     where: { email: "jhondoe@gmail.com" },
-  //   });
-
-  //   await request(app)
-  //     .get(`/users/${user?.id}`)
-  //     .then((res) => {
-  //       if (res.status === 400) {
-  //         return res.status;
-  //       }
-  //       expect(res.status).toBe(200);
-  //     });
-  // });
-
-  // it("-- should receive an error if user not found ", async () => {
-  //   const user = await prismaClient.user.findFirst({
-  //     where: { email: "jhondoe@gmail.com" },
-  //   });
-
-  //   await request(app)
-  //     .get(`/users/${user?.id}`)
-  //     .then((res) => {
-  //       if (res.status === 200) {
-  //         return res.status;
-  //       }
-  //       expect(res.status).toBe(400);
-  //       expect(res.body.name).toEqual("Wellington Atualizado");
-  //     });
-  // });
-
   it("-- should be updated user", async () => {
     const user = await prismaClient.user.findFirst({
       where: { CPF: "21878465040" },
@@ -107,35 +76,35 @@ describe("## User routes", () => {
       });
   });
 
-  // it("-- should get an error when updating an user", async () => {
-  //   const user = await prismaClient.user.findFirst({
-  //     where: { email: "jhondoe@gmail.com" },
-  //   });
+  it("-- should get an error when updating an user", async () => {
+    const user = await prismaClient.user.findFirst({
+      where: { CPF: "21878465049" },
+    });
 
-  //   await request(app)
-  //     .put(`/users/${user?.id}`)
-  //     .send({ name: "Wellington Atualizado" })
-  //     .then((res) => {
-  //       if (res.status === 201) {
-  //         return res.body;
-  //       }
-  //       expect(res.status).toBe(400);
-  //     });
-  // });
+    await request(app)
+      .put(`/users/${user?.id}`)
+      .send({ name: "Wellington Atualizado" })
+      .then((res) => {
+        if (res.status === 201) {
+          return res.body;
+        }
+        expect(res.status).toBe(400);
+      });
+  });
 
-  // it("-- should be receive message #deleted user successfully", async () => {
-  //   const user = await prismaClient.user.findFirst({
-  //     where: { email: "jhondoe@gmail.com" },
-  //   });
+  it("-- should be receive message #deleted user successfully", async () => {
+    const user = await prismaClient.user.findFirst({
+      where: { CPF: "21878465040" },
+    });
 
-  //   await request(app)
-  //     .delete(`/users/${user?.id}`)
-  //     .then((res) => {
-  //       if (res.status === 400) {
-  //         return res.body;
-  //       }
-  //       expect(res.status).toBe(200);
-  //       expect(res.body.message).toEqual("Deleted user successfully!");
-  //     });
-  // });
+    await request(app)
+      .delete(`/users/${user?.id}`)
+      .then((res) => {
+        if (res.status === 400) {
+          return res.body;
+        }
+        expect(res.status).toBe(200);
+        expect(res.body.message).toEqual("Deleted user successfully!");
+      });
+  });
 });
