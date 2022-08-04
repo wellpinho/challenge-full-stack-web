@@ -8,4 +8,11 @@ const createUserJoi = celebrate({
   }),
 });
 
-export { createUserJoi };
+const updateUserJoi = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string(),
+    email: Joi.string().email(),
+  }),
+});
+
+export { createUserJoi, updateUserJoi };

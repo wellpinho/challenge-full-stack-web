@@ -1,5 +1,6 @@
 import request from "supertest";
 import { app } from "../../../src/app";
+import { prismaClient } from "../../../src/prismaClient";
 
 describe("## User routes", () => {
   it("-- Should create an user", async () => {
@@ -88,23 +89,23 @@ describe("## User routes", () => {
   //     });
   // });
 
-  // it("-- should be updated user", async () => {
-  //   const user = await prismaClient.user.findFirst({
-  //     where: { email: "jhondoe@gmail.com" },
-  //   });
+  it("-- should be updated user", async () => {
+    const user = await prismaClient.user.findFirst({
+      where: { CPF: "21878465040" },
+    });
 
-  //   await request(app)
-  //     .put(`/users/${user?.id}`)
-  //     .send({ name: "Wellington Atualizado" })
-  //     .then((res) => {
-  //       if (res.status === 400) {
-  //         return res.body;
-  //       } else {
-  //         expect(res.status).toBe(201);
-  //         expect(res.body.name).toEqual("Wellington Atualizado");
-  //       }
-  //     });
-  // });
+    await request(app)
+      .put(`/users/${user?.id}`)
+      .send({ name: "Wellington Atualizado" })
+      .then((res) => {
+        if (res.status === 400) {
+          return res.body;
+        } else {
+          expect(res.status).toBe(201);
+          expect(res.body.name).toEqual("Wellington Atualizado");
+        }
+      });
+  });
 
   // it("-- should get an error when updating an user", async () => {
   //   const user = await prismaClient.user.findFirst({

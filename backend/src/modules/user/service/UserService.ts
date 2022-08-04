@@ -10,6 +10,11 @@ interface IUser {
   CPF: string;
 }
 
+interface IUpdateUser {
+  name: string;
+  email: string;
+}
+
 class UserService {
   async list() {
     const users = await prismaClient.user.findMany();
@@ -18,7 +23,7 @@ class UserService {
   }
 
   async create({ name, email, CPF }: IUser) {
-    if (!isCpf(CPF)) {
+    if (CPF && !isCpf(CPF)) {
       throw new AppError("Invalid CPF");
     }
 
@@ -40,6 +45,23 @@ class UserService {
         CPF,
         role: "user",
       },
+    });
+
+    return user;
+  }
+
+  async update(id: string, { name, email }: IUpdateUser) {
+    const userExists = await prismaClient.user.findUnique({
+      where: { id },
+    });
+
+    if (!userExists) {
+      throw new AppError("User not found!");
+    }
+
+    const user = await prismaClient.user.update({
+      where: { id },
+      data: { name, email },
     });
 
     return user;
