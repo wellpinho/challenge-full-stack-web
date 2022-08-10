@@ -21,3 +21,8 @@ No update do usuário só poderia alterar o email, tendo em vista que um nome se
 
 ## Requisitos que não foram entregues
 Nenhum todo o CRUD foi feito e testado.
+
+## O que fiz fora do escopo
+CPF esta validado, tanto no backend quanto no frontend.
+Email validado tanto no backend quanto no frontend
+Não é possível criar um user caso já exista no banco cpf, email ou nome
