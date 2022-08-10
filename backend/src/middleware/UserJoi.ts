@@ -4,6 +4,7 @@ const createUserJoi = celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
+    RA: Joi.number().required(),
     CPF: Joi.string().required(),
   }),
 });

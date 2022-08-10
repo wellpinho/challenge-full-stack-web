@@ -14,8 +14,8 @@ model User {
   id    String @id @default(uuid())
   name  String
   email String @unique
-  RA    String
-  CPF   String
+  RA    Int
+  CPF   String @unique
   role  String
 
   @@map("users")

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { resolve } from "path";
 import { UserService } from "../service/UserService";
 
 class UserController {
@@ -11,11 +10,12 @@ class UserController {
   }
 
   async create(req: Request, res: Response) {
-    const { name, email, CPF } = req.body;
+    const { name, email, RA, CPF } = req.body;
     const createUserService = new UserService();
     const user = await createUserService.create({
       name,
       email,
+      RA,
       CPF,
     });
 

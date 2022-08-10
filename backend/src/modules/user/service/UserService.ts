@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { AppError } from "../../../errors/AppError";
 import { prismaClient } from "../../../prismaClient";
 
@@ -7,6 +6,7 @@ import { isCpf } from "iscpf";
 interface IUser {
   name: string;
   email: string;
+  RA: number;
   CPF: string;
 }
 
@@ -22,7 +22,7 @@ class UserService {
     return users;
   }
 
-  async create({ name, email, CPF }: IUser) {
+  async create({ name, email, RA, CPF }: IUser) {
     if (CPF && !isCpf(CPF)) {
       throw new AppError("Invalid CPF");
     }
@@ -41,7 +41,7 @@ class UserService {
       data: {
         name,
         email,
-        RA: uuidv4(),
+        RA,
         CPF,
         role: "user",
       },
